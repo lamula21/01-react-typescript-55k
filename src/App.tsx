@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { type User } from './types.d'
 import UserList from './components/UserList'
@@ -7,6 +7,7 @@ function App() {
 	const [users, setUsers] = useState<User[]>([])
 	const [showColors, setShowColors] = useState(false)
 	const [sortByCountry, setSortByCountry] = useState(false)
+	const originalUsers = useRef<User[]>([])
 
 	const toggleColors = () => {
 		setShowColors(!showColors)
@@ -16,17 +17,13 @@ function App() {
 		setSortByCountry((prevState) => !prevState)
 	}
 
-	const handleDelete = (email: string) => {
-		const filteredUsers = users.filter((user) => user.email !== email)
-		setUsers(filteredUsers)
-	}
-
 	// #1 Fetch 100 rows
 	useEffect(() => {
 		fetch('https://randomuser.me/api/?results=100')
 			.then(async (res) => await res.json())
 			.then((res) => {
 				setUsers(res.results)
+				originalUsers.current = res.results
 			})
 			.catch((err) => {
 				console.log(err)
@@ -41,6 +38,13 @@ function App() {
 		: users
 
 	// #4 Delete Users
+	const handleDelete = (email: string) => {
+		const filteredUsers = users.filter((user) => user.email !== email)
+		setUsers(filteredUsers)
+	}
+
+	// #5 Reset Users
+	const resetUsers = () => setUsers(originalUsers.current)
 
 	return (
 		<>
