@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { type User } from './types.d'
 import UserList from './components/UserList'
@@ -18,8 +18,20 @@ function App() {
 		setSortByCountry((prevState) => !prevState)
 	}
 
+	// #4 Delete Users
+	const handleDelete = (email: string) => {
+		const filteredUsers = users.filter((user) => user.email !== email)
+		setUsers(filteredUsers)
+	}
+
+	// #5 Reset Users
+	const handleReset = () => {
+		setUsers(originalUsers.current)
+	}
+
 	// #1 Fetch 100 rows
 	useEffect(() => {
+		console.log('useEffect')
 		fetch('https://randomuser.me/api/?results=100')
 			.then(async (res) => await res.json())
 			.then((res) => {
@@ -32,30 +44,29 @@ function App() {
 	}, [])
 
 	// #8 Filter by Country
-	const filteredByCountry =
-		typeof filterCountry === 'string' && filterCountry.length > 0
+	// #9 useMemo to avoid unnecessary re-renders
+	// Re-render when [dependecies] changes
+	const filteredByCountry = useMemo(() => {
+		console.log('calculate filterByCountry')
+		return typeof filterCountry === 'string' && filterCountry.length > 0
 			? users.filter((user) =>
 					user.location.country
 						.toLowerCase()
 						.includes(filterCountry.toLowerCase())
 			  )
 			: users
+	}, [users, filterCountry]) // -> Run once and re-run only when users/filterCountry changes
 
 	// #3 Sort By Country
-	const sortedUsers = sortByCountry
-		? [...filteredByCountry].sort((a, b) =>
-				a.location.country.localeCompare(b.location.country)
-		  )
-		: filteredByCountry
-
-	// #4 Delete Users
-	const handleDelete = (email: string) => {
-		const filteredUsers = users.filter((user) => user.email !== email)
-		setUsers(filteredUsers)
-	}
-
-	// #5 Reset Users
-	const resetUsers = () => setUsers(originalUsers.current)
+	// #9 useMemo to avoid unnecessary re-renders
+	const sortedUsers = useMemo(() => {
+		console.log('calculate sortedUsers')
+		return sortByCountry
+			? [...filteredByCountry].sort((a, b) =>
+					a.location.country.localeCompare(b.location.country)
+			  )
+			: filteredByCountry
+	}, [filteredByCountry, sortByCountry]) // Run once and re-run only when these two changes
 
 	return (
 		<>
@@ -63,7 +74,7 @@ function App() {
 			<header>
 				<button onClick={toggleColors}>Change Color</button>
 				<button onClick={toggleSortByCountry}>Sort By Country</button>
-				<button onClick={resetUsers}>Reset</button>
+				<button onClick={handleReset}>Reset</button>
 				<input
 					placeholder='Filter by Country'
 					onChange={(e) => {
@@ -74,7 +85,7 @@ function App() {
 			<main>
 				<UserList
 					showColors={showColors}
-					users={sortedUsers}
+					users={sortedUsers.length == 0 ? users : sortedUsers}
 					deleteUser={handleDelete}
 				/>
 			</main>
