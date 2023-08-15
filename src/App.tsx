@@ -28,6 +28,13 @@ function App() {
 			})
 	}, [])
 
+	// #3 Sort By Country
+	const sortedUsers = sortByCountry
+		? [...users].sort((a, b) =>
+				a.location.country.localeCompare(b.location.country)
+		  )
+		: users
+
 	return (
 		<>
 			<h1>Technical Test</h1>
@@ -36,7 +43,7 @@ function App() {
 				<button onClick={toggleSortByCountry}>Sort By Country</button>
 			</header>
 			<main>
-				<UserList showColors={showColors} users={users} />
+				<UserList showColors={showColors} users={sortedUsers} />
 			</main>
 		</>
 	)
