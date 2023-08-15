@@ -13,5 +13,5 @@ Here are the steps to follow:
 - [x] 7. Handle any pontential error that may occur.
 - [x] 8. Implement a feature that allows the user to filter the data by country.
 - [x] 9. Avoid sorting users again the data when the user is changing filter by country.
-- [] 10. Sort by clicking on the column header.
+- [x] 10. Sort by clicking on the column header.
 - [] 11. Provide a README.md file with instructions on how tot urn the application.
