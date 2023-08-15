@@ -31,12 +31,22 @@ function App() {
 			})
 	}, [])
 
+	// #8 Filter by Country
+	const filteredByCountry =
+		typeof filterCountry === 'string' && filterCountry.length > 0
+			? users.filter((user) =>
+					user.location.country
+						.toLowerCase()
+						.includes(filterCountry.toLowerCase())
+			  )
+			: users
+
 	// #3 Sort By Country
 	const sortedUsers = sortByCountry
-		? [...users].sort((a, b) =>
+		? [...filteredByCountry].sort((a, b) =>
 				a.location.country.localeCompare(b.location.country)
 		  )
-		: users
+		: filteredByCountry
 
 	// #4 Delete Users
 	const handleDelete = (email: string) => {
@@ -54,6 +64,12 @@ function App() {
 				<button onClick={toggleColors}>Change Color</button>
 				<button onClick={toggleSortByCountry}>Sort By Country</button>
 				<button onClick={resetUsers}>Reset</button>
+				<input
+					placeholder='Filter by Country'
+					onChange={(e) => {
+						setFilterCountry(e.target.value)
+					}}
+				/>
 			</header>
 			<main>
 				<UserList

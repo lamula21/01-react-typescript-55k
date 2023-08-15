@@ -11,7 +11,7 @@ Here are the steps to follow:
 - [x] 5. Enable the ability to delete a row as shown in the example.
 - [x] 6. Implement a feature that allows the user to restore the initial state, meaning that all deleted rows will be recovered.
 - [x] 7. Handle any pontential error that may occur.
-- [] 8. Implement a feature that allows the user to flter the data by country.
+- [x] 8. Implement a feature that allows the user to filter the data by country.
 - [] 9. Avoid sorting users again the data when the user is changing filter by country.
 - [] 10. Sort by clicking on the column header.
 - [] 11. Provide a README.md file with instructions on how tot urn the application.
