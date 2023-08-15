@@ -8,6 +8,7 @@ function App() {
 	const [showColors, setShowColors] = useState(false)
 	const [sortByCountry, setSortByCountry] = useState(false)
 	const originalUsers = useRef<User[]>([])
+	const [filterCountry, setFilterCountry] = useState<string | null>(null)
 
 	const toggleColors = () => {
 		setShowColors(!showColors)
@@ -52,6 +53,7 @@ function App() {
 			<header>
 				<button onClick={toggleColors}>Change Color</button>
 				<button onClick={toggleSortByCountry}>Sort By Country</button>
+				<button onClick={resetUsers}>Reset</button>
 			</header>
 			<main>
 				<UserList
