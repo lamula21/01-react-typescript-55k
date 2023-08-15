@@ -8,7 +8,7 @@ Here are the steps to follow:
 - [x] 2. Display the data in a table format, similar to the example.
 - [x] 3. Provide the option to color rows as shown in the example.
 - [x] 4. Allow the data to be sorted by country as demonstrated in the example.
-- [] 5. Enable the ability to delete a row as shown in the example.
+- [x] 5. Enable the ability to delete a row as shown in the example.
 - [] 6. Implement a feature that allows the user to restore the initial state, meaning that all deleted rows will be recovered.
 - [] 7. Handle any pontential error that may occur.
 - [] 8. Implement a feature that allows the user to flter the data by country.

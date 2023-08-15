@@ -1,10 +1,11 @@
 import { type User } from '../types'
 
 interface Props {
+	deleteUser: (email: string) => void
 	users: User[]
 	showColors: boolean
 }
-export default function UserList({ showColors, users }: Props) {
+export default function UserList({ showColors, users, deleteUser }: Props) {
 	// #2 Data in a table format
 	return (
 		<table width='100%'>
@@ -21,7 +22,7 @@ export default function UserList({ showColors, users }: Props) {
 			<tbody>
 				{!users && <div>Something went wrong</div>}
 				{users &&
-					users.map((users, index) => {
+					users.map((user, index) => {
 						// #3 Change colors to the table
 						const backgroundColor = index % 2 === 0 ? '#333' : '#555'
 						const color = showColors ? backgroundColor : 'transparent'
@@ -30,13 +31,13 @@ export default function UserList({ showColors, users }: Props) {
 							// key: here has a issue
 							<tr key={index} style={{ backgroundColor: color }}>
 								<td>
-									<img src={users.picture.thumbnail} />
+									<img src={user.picture.thumbnail} />
 								</td>
-								<td> {users.name.first} </td>
-								<td> {users.name.last} </td>
-								<td> {users.location.country} </td>
+								<td> {user.name.first} </td>
+								<td> {user.name.last} </td>
+								<td> {user.location.country} </td>
 								<td>
-									<button>Delete</button>
+									<button onClick={() => deleteUser(user.email)}>Delete</button>
 								</td>
 							</tr>
 						)
