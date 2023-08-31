@@ -14,7 +14,7 @@ Here are the steps to follow:
 - [x] 8. Implement a feature that allows the user to filter the data by country.
 - [x] 9. Avoid sorting users again the data when the user is changing filter by country.
 - [x] 10. Sort by clicking on the column header.
-- [] 11. Provide a README.md file with instructions on how tot urn the application.
+- [x] 11. Provide a README.md file with instructions on how to turn the application.
 
 ## Features
 
@@ -22,3 +22,11 @@ Here are the steps to follow:
 - Typescript
 - Tanstack Query / React Query for asynchronous state management
 - Vite to bundle React.js
+
+## Run
+
+Run application with the following command in the application directory
+
+```bash
+npm run dev
+```
