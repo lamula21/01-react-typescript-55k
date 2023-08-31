@@ -15,3 +15,10 @@ Here are the steps to follow:
 - [x] 9. Avoid sorting users again the data when the user is changing filter by country.
 - [x] 10. Sort by clicking on the column header.
 - [] 11. Provide a README.md file with instructions on how tot urn the application.
+
+## Features
+
+- React.js for main front-end library
+- Typescript
+- Tanstack Query / React Query for asynchronous state management
+- Vite to bundle React.js
