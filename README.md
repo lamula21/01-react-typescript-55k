@@ -30,3 +30,7 @@ Run application with the following command in the application directory
 ```bash
 npm run dev
 ```
+
+## Demo
+
+![react-typescript-55k](./public/react-test-55k.png)
